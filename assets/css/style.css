@@ -1,0 +1,346 @@
+/* ============================================
+   ASCEREX - Dark Futuristic Theme
+   Inspired by Anduril.com & SpaceX.com
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --color-bg: #0a0a0a;
+    --color-bg-translucent: rgba(10, 10, 10, 0.85);
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.7);
+    --color-accent: #ffffff;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --header-height: 80px;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================
+   STAGE - Header Container
+   ============================================ */
+.Stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transform: translateY(0);
+    transition: transform var(--transition-smooth);
+}
+
+.Stage[data-state="isCollapsed"] {
+    transform: translateY(-100%);
+}
+
+.Stage[data-state="isOpen"] {
+    transform: translateY(0);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    background: var(--color-bg-translucent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 48px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.logo-placeholder {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--color-text);
+    text-transform: uppercase;
+}
+
+/* Desktop Navigation */
+.nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    transition: color var(--transition-smooth);
+    text-transform: uppercase;
+}
+
+.nav-link:hover {
+    color: var(--color-text);
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: all var(--transition-smooth);
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Mobile Navigation */
+.nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: 0 48px 32px;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.nav-mobile .nav-link {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1rem;
+}
+
+.nav-mobile .nav-link:last-child {
+    border-bottom: none;
+}
+
+.nav-mobile.open {
+    max-height: 500px;
+    padding-bottom: 32px;
+}
+
+/* ============================================
+   HERO SECTIONS
+   ============================================ */
+.hero {
+    width: 100%;
+}
+
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 48px 80px;
+    text-align: center;
+    background: var(--color-bg);
+}
+
+/* Alternating background patterns for visual interest */
+.hero-section:nth-child(odd) {
+    background: linear-gradient(180deg, var(--color-bg) 0%, #0f0f0f 100%);
+}
+
+.hero-section:nth-child(even) {
+    background: linear-gradient(180deg, #0f0f0f 0%, var(--color-bg) 100%);
+}
+
+.hero-content {
+    max-width: 900px;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+}
+
+.hero-statement {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+/* Learn More Button */
+.btn-learn-more {
+    display: inline-block;
+    padding: 16px 40px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-bg);
+    background: var(--color-text);
+    border: 2px solid var(--color-text);
+    transition: all var(--transition-smooth);
+}
+
+.btn-learn-more:hover {
+    color: var(--color-text);
+    background: transparent;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--color-text-muted);
+    border-radius: 12px;
+    opacity: 0.5;
+}
+
+.scroll-indicator span {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--color-text-muted);
+    border-radius: 2px;
+    animation: scrollPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        opacity: 0.3;
+        transform: translateX(-50%) translateY(12px);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+    .nav-desktop {
+        gap: 24px;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        padding: 0 24px;
+    }
+
+    .nav-desktop {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-mobile {
+        display: flex;
+    }
+
+    .hero-section {
+        padding: 100px 24px 60px;
+    }
+
+    .scroll-indicator {
+        bottom: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-inner {
+        padding: 0 16px;
+    }
+
+    .nav-mobile {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .logo-placeholder {
+        font-size: 1.25rem;
+    }
+
+    .hero-section {
+        padding: 80px 16px 48px;
+    }
+
+    .btn-learn-more {
+        padding: 14px 32px;
+        font-size: 0.8rem;
+    }
+}
