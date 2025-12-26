@@ -65,9 +65,9 @@ a {
    HEADER
    ============================================ */
 .header {
-    background: var(--color-bg-translucent);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -196,20 +196,46 @@ a {
     padding: 120px 48px 80px;
     text-align: center;
     background: var(--color-bg);
+    overflow: hidden;
 }
 
-/* Alternating background patterns for visual interest */
-.hero-section:nth-child(odd) {
-    background: linear-gradient(180deg, var(--color-bg) 0%, #0f0f0f 100%);
+/* Background Media Wrapper */
+.hero-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
-.hero-section:nth-child(even) {
-    background: linear-gradient(180deg, #0f0f0f 0%, var(--color-bg) 100%);
+.hero-media video,
+.hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Vignette Overlay */
+.hero-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at center, transparent 30%, rgba(10, 10, 10, 0.6) 100%),
+        linear-gradient(to bottom, transparent 75%, var(--color-bg) 100%),
+        linear-gradient(to top, transparent 85%, var(--color-bg) 100%);
 }
 
 .hero-content {
     max-width: 900px;
-    z-index: 1;
+    z-index: 2;
+    position: relative;
 }
 
 .hero-title {
@@ -248,42 +274,6 @@ a {
     background: transparent;
 }
 
-/* Scroll Indicator */
-.scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 24px;
-    height: 40px;
-    border: 2px solid var(--color-text-muted);
-    border-radius: 12px;
-    opacity: 0.5;
-}
-
-.scroll-indicator span {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 8px;
-    background: var(--color-text-muted);
-    border-radius: 2px;
-    animation: scrollPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-    0%, 100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        opacity: 0.3;
-        transform: translateX(-50%) translateY(12px);
-    }
-}
-
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
@@ -316,10 +306,6 @@ a {
 
     .hero-section {
         padding: 100px 24px 60px;
-    }
-
-    .scroll-indicator {
-        bottom: 24px;
     }
 }
 
@@ -413,6 +399,7 @@ a {
 .footer-contact,
 .footer-privacy,
 .footer-copyright {
+    flex: 1;
     font-size: 0.875rem;
     color: var(--color-text-muted);
     letter-spacing: 0.05em;
