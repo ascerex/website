@@ -1,11 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ascerex</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCEREX</title>
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="Ascerex">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <h1>Ascerex</h1>
-  <p>Ascend Earth, Revolutionize Exploration</p>
+    <div class="Stage" data-state="isOpen">
+        <header class="header">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/ascerex_logo.png" alt="Ascerex Logo" class="logo-icon">
+                    <span class="logo-text">ASCEREX</span>
+                </a>
+
+                <nav class="nav-desktop">
+                    <a href="mission.html" class="nav-link">Mission</a>
+                    <a href="vehicle.html" class="nav-link">Vehicle</a>
+                    <a href="skyway.html" class="nav-link">Skyway</a>
+                    <a href="pilot.html" class="nav-link">Flight Autonomy</a>
+                    <a href="investors.html" class="nav-link">Investors</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+
+                <button class="hamburger" aria-label="Toggle menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+
+            <nav class="nav-mobile">
+                <a href="mission.html" class="nav-link">Mission</a>
+                <a href="vehicle.html" class="nav-link">Vehicle</a>
+                <a href="skyway.html" class="nav-link">Skyway</a>
+                <a href="pilot.html" class="nav-link">Flight Autonomy</a>
+                <a href="investors.html" class="nav-link">Investors</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+        </header>
+    </div>
+
+    <main class="hero">
+        <section class="hero-section align-right" id="mission">
+            <span role="img" class="hero-media video-wrapper">
+                <video aria-hidden="true" autoplay muted loop playsinline preload="auto" poster="assets/images/horizon.jpeg">
+                    <source type="video/mp4" src="assets/images/skyline.mp4">
+                </video>
+            </span>
+            <div class="hero-vignette"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Revolutionizing Transportation</h1>
+                <p class="hero-statement">Ascerex completes Henry Ford's unrealized ambition by designing the infrastructure and vehicles needed to make personal flight accessible, affordable, and practical for families and individuals.</p>
+                <a href="mission.html" class="btn-learn-more">Learn More</a>
+            </div>
+        </section>
+
+        <section class="hero-section align-left" id="skyway">
+            <span class="hero-media">
+                <img src="assets/images/skyway.JPG" alt="Skyway Network">
+            </span>
+            <div class="hero-vignette"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Charting the Skyway Infrastructure</h1>
+                <p class="hero-statement">By mapping a seamless Skyway network of air traffic routes over existing paths, Ascerex plans to enable dense, scalable aerial transportation for the demands of tomorrow's airspace.</p>
+                <a href="skyway.html" class="btn-learn-more">Learn More</a>
+            </div>
+        </section>
+
+        <section class="hero-section align-right" id="vehicle">
+            <span class="hero-media">
+                <img src="assets/images/vehicle.PNG" alt="VTOL Vehicle">
+            </span>
+            <div class="hero-vignette"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Building a New Class of Vehicle</h1>
+                <p class="hero-statement">Ascerex is pioneering a compact VTOL aircraft vehicle engineered for efficiency, reliability, and safe human transportation.</p>
+                <a href="vehicle.html" class="btn-learn-more">Learn More</a>
+            </div>
+        </section>
+
+        <section class="hero-section align-left" id="flight-autonomy">
+            <!-- <span role="img" class="hero-media video-wrapper">
+                <video aria-hidden="true" autoplay muted loop playsinline preload="auto" poster="assets/images/autonomy.png">
+                    <source type="video/mp4" src="assets/images/flight_controller.mp4">
+                </video>
+            </span> -->
+            <span class="hero-media">
+                <img src="assets/images/autonomy.jpg" alt="Motherboard">
+            </span>
+            <div class="hero-vignette"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Delivering Autonomous Flight Systems</h1>
+                <p class="hero-statement">Ascerex vehicles will be embedded with fully autonomous flight intelligence to remove the need for human piloting, ensuring safe, reliable operations within the Skyway and opening aerial travel to everyone.</p>
+                <a href="pilot.html" class="btn-learn-more">Learn More</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <p class="footer-contact-label">Contact</p>
+                <a href="mailto:contact@ascerex.com" class="footer-contact-email">contact@ascerex.com</a>
+            </div>
+            <div class="footer-privacy">
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 ASCEREX</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
