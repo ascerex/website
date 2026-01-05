@@ -198,7 +198,7 @@
                             (direction === 'prev' && isHoveringLeft)) {
                             handleHover(direction);
                         }
-                    }, 500);
+                    }, 650);
                 }
             }, 300);
         }
