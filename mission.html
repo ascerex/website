@@ -20,7 +20,7 @@
         <header class="header">
             <div class="header-inner">
                 <a href="index.html" class="logo">
-                    <img src="assets/images/ascerex_logo.png" alt="Ascerex Logo" class="logo-icon">
+                    <img src="assets/favicon/logo.svg" alt="Ascerex Logo" class="logo-icon">
                     <span class="logo-text">ASCEREX</span>
                 </a>
 
@@ -53,8 +53,228 @@
 
     <main class="page-content">
         <section class="page-hero">
-            <h1 class="page-title">Mission</h1>
-            <p class="page-description">Placeholder content for the Mission page.</p>
+            <div class="hero-video-bg">
+                <span role="img" class="hero-media video-wrapper">
+                    <video disablePictureInPicture aria-hidden="true" autoplay muted loop playsinline preload="auto" poster="assets/images/nightstatic.png">
+                        <source type="video/mp4" src="assets/images/night.mp4">
+                    </video>
+                </span>
+            </div>
+            <h1 class="page-title">ASCEREX</h1>
+            <p class="page-subtitle">Ascend Earth - Revolutionize Exploration</p>
+        </section>
+
+        <section class="content-section">
+            <div class="content-inner">
+                <h2 class="section-header-centered">Mission Statement</h2>
+                <p class="content-text">History shows that many of the most significant advances in transportation—and society—occur when mobility evolves from centralized systems toward affordable, widespread individual access.</p>
+
+                <p class="content-text">On the ground, this shift became clear with the transition from rail-based travel to the automobile, which enabled personal mobility at scale. Henry Ford's innovations made vehicles reliable and affordable for the masses, giving millions the freedom to move independently and reshaping daily life.</p>
+
+                <p class="content-text">Aviation has not undergone the same transition. It remains dominated by centralized airline operations—large aircraft, fixed routes, complex control systems, and costs that limit access. Private jets reduce scale, but not complexity or accessibility. No true personal aerial vehicle has ever emerged for everyday use.</p>
+
+                <p class="content-text">Ascerex exists to drive this next evolution. We are developing a new category of aerial vehicle, integrated with dedicated airspace infrastructure, autonomous flight systems, and modernized regulatory frameworks—making personal flight safe, affordable, and practical for families and individuals.</p>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section class="roadmap-section">
+            <div class="roadmap-inner">
+                <h2 class="roadmap-heading">Integrated System Architecture</h2>
+                <p class="roadmap-summary">Ascerex advances development of each system through simulation-driven design and algorithmic modeling. This digital-first approach validates feasibility, and safety early, minimizing risk and ensuring scalability before physical deployment.</p>
+                <!-- Pyramid Flow Diagram -->
+                <div class="pyramid-diagram">
+                    <svg class="pyramid-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">
+                        <!-- Feedback loops (faint curved paths from top back to base, connecting to middle sides) -->
+                        <path class="pyramid-loop" d="M 270 50 C 40 50, 20 180, 20 280 C 20 340, 50 340, 85 340" />
+                        <path class="pyramid-loop" d="M 330 50 C 560 50, 580 180, 580 280 C 580 340, 550 340, 515 340" />
+
+                        <!-- Left leg: Vehicle → Performance → AI Pilot -->
+                        <line class="pyramid-line" x1="150" y1="315" x2="150" y2="235" />
+                        <line class="pyramid-line" x1="185" y1="195" x2="265" y2="145" />
+
+                        <!-- Cross connection: Performance → Infrastructure (diagonal) -->
+                        <line class="pyramid-line pyramid-line-cross" x1="185" y1="220" x2="383" y2="320" />
+
+                        <!-- Right leg: Infrastructure → Navigation → AI Pilot -->
+                        <line class="pyramid-line" x1="450" y1="315" x2="450" y2="235" />
+                        <line class="pyramid-line" x1="415" y1="195" x2="335" y2="145" />
+
+                        <!-- Top: AI Pilot → Policy -->
+                        <line class="pyramid-line" x1="300" y1="110" x2="300" y2="65" />
+
+                        <!-- Arrowheads (pointing in direction of flow) -->
+                        <polygon class="pyramid-arrow" points="150,235 145,245 155,245" />
+                        <polygon class="pyramid-arrow" points="265,145 252,147 258,155" />
+                        <polygon class="pyramid-arrow" points="383,320 370,319 374,311" />
+                        <polygon class="pyramid-arrow" points="450,235 445,245 455,245" />
+                        <polygon class="pyramid-arrow" points="335,145 342,155 348,147" />
+                        <polygon class="pyramid-arrow" points="300,65 295,75 305,75" />
+                    </svg>
+
+                    <!-- Diagram boxes positioned over SVG -->
+                    <div class="pyramid-boxes">
+                        <div class="pyramid-box pyramid-top">
+                            <span class="pyramid-title">Policy & Regulation</span>
+                            <span class="pyramid-subtitle">Compliance, Certification & Approval</span>
+                        </div>
+                        <div class="pyramid-box pyramid-center">
+                            <span class="pyramid-title">Autonomous Flight</span>
+                            <span class="pyramid-subtitle">Control, Navigation & Deconfliction</span>
+                        </div>
+                        <div class="pyramid-box pyramid-left-base">
+                            <span class="pyramid-title">Requirements & Constraints</span>
+                            <span class="pyramid-subtitle">Definitions & Operational Envelope</span>
+                        </div>
+                        <div class="pyramid-box pyramid-right-mid">
+                            <span class="pyramid-title">Skyway Navigation</span>
+                            <span class="pyramid-subtitle">Constraint-Aware Routing</span>
+                        </div>
+                        <div class="pyramid-box pyramid-left-mid">
+                            <span class="pyramid-title">Propulsion & Vehicle</span>
+                            <span class="pyramid-subtitle">Validation, Modeling & Integration</span>
+                        </div>
+                        <div class="pyramid-box pyramid-right-base">
+                            <span class="pyramid-title">Skyway Infrastructure</span>
+                            <span class="pyramid-subtitle">Network Synthesis & Optimization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descriptions Grid -->
+                <div class="roadmap-descriptions">
+                    <div class="roadmap-grid">
+                        <div class="roadmap-item">
+                            <div class="roadmap-item-header">
+                                <span class="roadmap-item-icon">&#x26D3;</span>
+                                <h3 class="roadmap-item-title">Requirements & Constraints</h3>
+                            </div>
+                            <p class="roadmap-item-desc">Operational envelope that governs system viability, including energy consumption, thrust requirements, mass limits, noise constraints, range targets, and road-legal dimensional boundaries.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-item-header">
+                                <span class="roadmap-item-icon roadmap-item-icon-lg">&#9729;</span>
+                                <h3 class="roadmap-item-title">Skyway Infrastructure</h3>
+                            </div>
+                            <p class="roadmap-item-desc">Scalable air traffic network generated through algorithmic mapping and constraint-based modeling to define corridors, altitudes, capacity, and integration with vehicle performance and operational limits.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-item-header">
+                                <span class="roadmap-item-icon">&#9992;</span>
+                                <h3 class="roadmap-item-title">Propulsion & Vehicle</h3>
+                            </div>
+                            <p class="roadmap-item-desc">VTOL aircraft modeled with propulsion architectures screened against defined constraints and integrated in simulations to optimize chassis, energy consumption, aerodynamics, and payload capcity before validation.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-item-header">
+                                <span class="roadmap-item-icon">&#10148;</span>
+                                <h3 class="roadmap-item-title">Skyway Navigation</h3>
+                            </div>
+                            <p class="roadmap-item-desc">Routing software built on top of Skyway infrastructure for point-to-point guidance, using algorithms that account for operational, safety, and regulatory constraints.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-item-header">
+                                <span class="roadmap-item-icon">&#9881;</span>
+                                <h3 class="roadmap-item-title">Autonomous Flight Intelligence</h3>
+                            </div>
+                            <p class="roadmap-item-desc">Integrated flight autonomy that combines vehicle control, Skyway navigation, and cooperative deconfliction. System validated through simulations and testing across a wide range of operating scenarios.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="roadmap-item-header">
+                                <span class="roadmap-item-icon">&#9878;</span>
+                                <h3 class="roadmap-item-title">Policy & Regulation</h3>
+                            </div>
+                            <p class="roadmap-item-desc">Framework engagement through staged approval process once system behavior can be demonstrated through validated models, simulations, and controlled testing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Policy Section -->
+        <section class="policy-section">
+            <div class="policy-inner">
+                <!-- Policy Overview with Radial Diagram -->
+                <div class="policy-overview">
+                    <div class="policy-text">
+                        <h2 class="policy-heading">Policy & Regulatory Alignment</h2>
+                        <p class="policy-intro">Ascerex is designed from the ground up to operate within — and help modernize — existing aviation regulatory frameworks. Personal aerial mobility at scale demands coordinated evolution across airspace access, certification, operations, infrastructure, and safety governance.</p>
+                        <p class="policy-intro">Rather than treating regulation as a downstream obstacle, Ascerex integrates policy considerations directly into system architecture, enabling faster staged approvals, lower deployment risk, and long-term scalability.</p>
+                    </div>
+                    <div class="policy-radial">
+                        <svg class="radial-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+                            <!-- Connection lines from center to bubbles -->
+                            <line class="radial-line" x1="200" y1="200" x2="200" y2="60" />
+                            <line class="radial-line" x1="200" y1="200" x2="320" y2="100" />
+                            <line class="radial-line" x1="200" y1="200" x2="340" y2="200" />
+                            <line class="radial-line" x1="200" y1="200" x2="320" y2="300" />
+                            <line class="radial-line" x1="200" y1="200" x2="200" y2="340" />
+                            <line class="radial-line" x1="200" y1="200" x2="80" y2="300" />
+                            <line class="radial-line" x1="200" y1="200" x2="60" y2="200" />
+                        </svg>
+                        <div class="radial-bubbles">
+                            <div class="radial-center">
+                                <span>Policy Framework</span>
+                            </div>
+                            <div class="radial-bubble radial-pos-1 active" data-index="0"><span>Airspace Access</span></div>
+                            <div class="radial-bubble radial-pos-2" data-index="1"><span>Autonomy Certification</span></div>
+                            <div class="radial-bubble radial-pos-3" data-index="2"><span>Vehicle Certification</span></div>
+                            <div class="radial-bubble radial-pos-4" data-index="3"><span>Operations & Traffic</span></div>
+                            <div class="radial-bubble radial-pos-5" data-index="4"><span>Infrastructure & Zoning</span></div>
+                            <div class="radial-bubble radial-pos-6" data-index="5"><span>Safety & Liability</span></div>
+                            <div class="radial-bubble radial-pos-7" data-index="6"><span>Security & Environment</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Policy Carousel -->
+                <div class="policy-carousel">
+                    <div class="policy-nav-field policy-nav-left" aria-label="Previous category">
+                        <svg class="policy-nav-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </div>
+
+                    <div class="policy-carousel-track">
+                        <div class="policy-carousel-slides">
+                            <div class="policy-slide" data-index="0">
+                                <h3 class="policy-slide-title">Airspace Access</h3>
+                                <p class="policy-slide-desc">Defines how personal aerial vehicles enter, traverse, and exit controlled and low-altitude airspace. Focus areas include FAA and EASA airspace classification, low-altitude integration through UTM concepts, structured corridors, and dynamic entry and exit rules compatible with existing aviation traffic.</p>
+                            </div>
+                            <div class="policy-slide" data-index="1">
+                                <h3 class="policy-slide-title">Autonomy Certification</h3>
+                                <p class="policy-slide-desc">Addresses approval pathways for autonomous flight systems operating without onboard pilots. Development aligns with certifiable software and system assurance standards, including DO-178C and emerging Advanced Air Mobility (AAM) frameworks, with emphasis on redundancy, validation, and transparent safety cases.</p>
+                            </div>
+                            <div class="policy-slide" data-index="2">
+                                <h3 class="policy-slide-title">Vehicle Certification</h3>
+                                <p class="policy-slide-desc">Covers airworthiness, type certification, and operational safety requirements for a new class of personal aerial vehicles. Certification strategy is informed by Part 23 and Part 27 aviation frameworks, with additional consideration for limited ground-mobility compliance to support safe surface operations in designated areas.</p>
+                            </div>
+                            <div class="policy-slide" data-index="3">
+                                <h3 class="policy-slide-title">Operations & Traffic</h3>
+                                <p class="policy-slide-desc">Skyway rules establish predictable routing, right-of-way protocols, and density management for high-volume operations. Modeled on proven traffic systems, these guidelines enable safe scaling without traditional tower-by-tower oversight.</p>
+                            </div>
+                            <div class="policy-slide" data-index="4">
+                                <h3 class="policy-slide-title">Infrastructure & Zoning</h3>
+                                <p class="policy-slide-desc">Addresses the approval and integration of takeoff, landing, and staging zones within urban and suburban environments. Focus areas include zoning compatibility, land-use policy, and seamless integration with existing transportation infrastructure.</p>
+                            </div>
+                            <div class="policy-slide" data-index="5">
+                                <h3 class="policy-slide-title">Safety & Liability</h3>
+                                <p class="policy-slide-desc">Defines accountability frameworks for autonomous operations, including incident handling, insurance models, and operator responsibility. Clear liability structures are essential for public trust, regulatory approval, and commercial deployment.</p>
+                            </div>
+                            <div class="policy-slide" data-index="6">
+                                <h3 class="policy-slide-title">Security & Environment</h3>
+                                <p class="policy-slide-desc">Covers cybersecurity protections, system resilience, noise management, and environmental impact. Considerations align with NIST cybersecurity principles, EPA environmental guidance, and ICAO standards to ensure public safety, regulatory acceptance, and long-term sustainability at scale.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="policy-nav-field policy-nav-right" aria-label="Next category">
+                        <svg class="policy-nav-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
