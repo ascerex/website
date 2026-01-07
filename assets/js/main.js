@@ -155,11 +155,21 @@
         }
 
         function handleClick(direction) {
-            // Block clicks if autoscroll just happened
-            if (autoscrollCooldown) return;
-
             // Clear any pending hover timeout
             clearTimeout(hoverTimeout);
+
+            // If click during autoscroll cooldown, don't scroll but take over control
+            if (autoscrollCooldown) {
+                autoscrollCooldown = false;
+                // Stop autoscroll by clearing hover flags until mouse re-enters
+                isHoveringLeft = false;
+                isHoveringRight = false;
+                clickCooldown = true;
+                setTimeout(() => {
+                    clickCooldown = false;
+                }, 100);
+                return;
+            }
 
             // Navigate
             if (direction === 'next') {
@@ -168,11 +178,11 @@
                 prevSlide();
             }
 
-            // Set cooldown to prevent hover from triggering immediately
+            // Set cooldown to prevent hover from triggering immediately after click
             clickCooldown = true;
             setTimeout(() => {
                 clickCooldown = false;
-            }, 600);
+            }, 400);
         }
 
         function handleHover(direction) {
@@ -186,16 +196,16 @@
                         prevSlide();
                     }
 
-                    // Set autoscroll cooldown to prevent click from double-scrolling
+                    // Set brief cooldown to prevent click double-scroll
                     autoscrollCooldown = true;
                     setTimeout(() => {
                         autoscrollCooldown = false;
-                    }, 800);
+                    }, 400);
 
                     // Continue scrolling if still hovering
                     setTimeout(() => {
-                        if ((direction === 'next' && isHoveringRight) ||
-                            (direction === 'prev' && isHoveringLeft)) {
+                        if (!clickCooldown && ((direction === 'next' && isHoveringRight) ||
+                            (direction === 'prev' && isHoveringLeft))) {
                             handleHover(direction);
                         }
                     }, 650);
@@ -260,11 +270,12 @@
      * Text Scramble Effect
      */
     class TextScramble {
-        constructor(el) {
+        constructor(el, speed = 25) {
             this.el = el;
             this.chars = '!<>-_\\/[]{}—=+*^?#________';
             this.originalText = el.textContent;
             this.isAnimating = false;
+            this.speed = speed;
         }
 
         scramble() {
@@ -274,13 +285,15 @@
             const text = this.originalText;
             const length = text.length;
             let iteration = 0;
-            const maxIterations = length * 2;
+            // Faster reveal: use 1.5x multiplier instead of 2x
+            const maxIterations = Math.ceil(length * 1.5);
 
             const interval = setInterval(() => {
                 this.el.textContent = text
                     .split('')
                     .map((char, index) => {
-                        if (index < iteration / 2) {
+                        // Reveal characters faster
+                        if (index < iteration / 1.5) {
                             return text[index];
                         }
                         if (char === ' ') return ' ';
@@ -295,7 +308,7 @@
                     this.el.textContent = text;
                     this.isAnimating = false;
                 }
-            }, 25);
+            }, this.speed);
         }
 
         reset() {
@@ -325,22 +338,27 @@
         let isHoveringRight = false;
         let lastScrollPosition = slidesContainer.scrollLeft;
 
-        // Initialize scramble instances for each card
+        // Initialize scramble instances for each card (type = fast, status = normal with delay)
         cards.forEach(card => {
-            const scrambleElements = card.querySelectorAll('.scramble-text');
-            const instances = [];
-            scrambleElements.forEach(el => {
-                instances.push(new TextScramble(el));
+            const typeEl = card.querySelector('.propulsion-card-type');
+            const statusEl = card.querySelector('.propulsion-card-status');
+            scrambleInstances.set(card, {
+                type: typeEl ? new TextScramble(typeEl, 15) : null,  // Faster speed
+                status: statusEl ? new TextScramble(statusEl, 20) : null  // Slightly slower
             });
-            scrambleInstances.set(card, instances);
         });
 
-        // Hover handlers for scramble effect
+        // Hover handlers for scramble effect - type starts immediately, status delayed
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => {
                 const instances = scrambleInstances.get(card);
                 if (instances) {
-                    instances.forEach(instance => instance.scramble());
+                    // Start type immediately
+                    if (instances.type) instances.type.scramble();
+                    // Start status after short delay
+                    setTimeout(() => {
+                        if (instances.status) instances.status.scramble();
+                    }, 100);
                 }
             });
         });
@@ -352,41 +370,72 @@
             return card.offsetWidth + gap;
         }
 
+        // Get current card index based on scroll position
+        let currentCardIndex = 0;
+
+        function getCurrentCardIndex() {
+            const cardWidth = getCardWidth();
+            const bounds = getScrollBounds();
+            const scrollPos = slidesContainer.scrollLeft - bounds.min;
+            return Math.round(scrollPos / cardWidth);
+        }
+
         // Get scroll boundaries (accounting for spacers)
         function getScrollBounds() {
             const cardWidth = getCardWidth();
-            const spacerWidth = cardWidth * 1.17; // Approximate spacer width (35% vs 30%)
-            const maxScroll = slidesContainer.scrollWidth - slidesContainer.clientWidth;
+            const totalCards = cards.length;
+            const gap = 24;
+
+            // Calculate actual content width (all cards + gaps between them)
+            const contentWidth = (cardWidth * totalCards) + (gap * (totalCards - 1));
+
+            // Spacer width is (scrollWidth - contentWidth) / 2
+            const totalScrollWidth = slidesContainer.scrollWidth;
+            const spacerWidth = (totalScrollWidth - contentWidth) / 2;
+
+            const maxScroll = totalScrollWidth - slidesContainer.clientWidth;
+
             return {
-                min: spacerWidth - cardWidth * 0.15, // Allow small peek at start
-                max: maxScroll - spacerWidth + cardWidth * 0.15 // Allow small peek at end
+                min: Math.max(0, spacerWidth - cardWidth * 0.1),
+                max: Math.min(maxScroll, maxScroll - spacerWidth + cardWidth * 0.1),
+                spacerWidth: spacerWidth
             };
+        }
+
+        // Scroll to specific card index
+        function scrollToCard(index) {
+            const bounds = getScrollBounds();
+            const cardWidth = getCardWidth();
+            const targetScroll = bounds.min + (index * cardWidth);
+
+            // Clamp to bounds
+            const clampedScroll = Math.max(bounds.min, Math.min(bounds.max, targetScroll));
+            slidesContainer.scrollTo({ left: clampedScroll, behavior: 'smooth' });
+            currentCardIndex = index;
         }
 
         // Check if at start boundary
         function isAtStart() {
-            const bounds = getScrollBounds();
-            return slidesContainer.scrollLeft <= bounds.min + 10;
+            return currentCardIndex <= 0;
         }
 
         // Check if at end boundary
         function isAtEnd() {
-            const bounds = getScrollBounds();
-            return slidesContainer.scrollLeft >= bounds.max - 10;
+            return currentCardIndex >= cards.length - 1;
         }
 
         // Scroll to next/prev
         function scrollNext() {
             if (isAtEnd()) return false;
-            const cardWidth = getCardWidth();
-            slidesContainer.scrollBy({ left: cardWidth, behavior: 'smooth' });
+            currentCardIndex = Math.min(cards.length - 1, getCurrentCardIndex() + 1);
+            scrollToCard(currentCardIndex);
             return true;
         }
 
         function scrollPrev() {
             if (isAtStart()) return false;
-            const cardWidth = getCardWidth();
-            slidesContainer.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+            currentCardIndex = Math.max(0, getCurrentCardIndex() - 1);
+            scrollToCard(currentCardIndex);
             return true;
         }
 
@@ -428,9 +477,21 @@
 
         // Handle navigation click
         function handleNavClick(direction) {
-            if (autoscrollCooldown) return;
-
+            // Clear any pending hover timeout
             clearTimeout(hoverTimeout);
+
+            // If click during autoscroll cooldown, don't scroll but take over control
+            if (autoscrollCooldown) {
+                autoscrollCooldown = false;
+                // Stop autoscroll by clearing hover flags until mouse re-enters
+                isHoveringLeft = false;
+                isHoveringRight = false;
+                clickCooldown = true;
+                setTimeout(() => {
+                    clickCooldown = false;
+                }, 100);
+                return;
+            }
 
             if (direction === 'next') {
                 scrollNext();
@@ -438,10 +499,11 @@
                 scrollPrev();
             }
 
+            // Set cooldown to prevent hover from triggering immediately after click
             clickCooldown = true;
             setTimeout(() => {
                 clickCooldown = false;
-            }, 600);
+            }, 400);
         }
 
         // Handle hover autoscroll
@@ -454,47 +516,58 @@
 
             hoverTimeout = setTimeout(() => {
                 if (!clickCooldown) {
-                    let scrolled = false;
                     if (direction === 'next') {
-                        scrolled = scrollNext();
+                        scrollNext();
                     } else {
-                        scrolled = scrollPrev();
+                        scrollPrev();
                     }
 
-                    // Only set cooldown and continue if we actually scrolled
-                    if (scrolled) {
-                        autoscrollCooldown = true;
-                        setTimeout(() => {
-                            autoscrollCooldown = false;
-                        }, 800);
+                    // Set brief cooldown to prevent click double-scroll
+                    autoscrollCooldown = true;
+                    setTimeout(() => {
+                        autoscrollCooldown = false;
+                    }, 400);
 
-                        // Continue scrolling if still hovering and not at boundary
-                        setTimeout(() => {
-                            if ((direction === 'next' && isHoveringRight && !isAtEnd()) ||
-                                (direction === 'prev' && isHoveringLeft && !isAtStart())) {
-                                handleHover(direction);
-                            }
-                        }, 650);
-                    }
+                    // Continue scrolling if still hovering
+                    setTimeout(() => {
+                        if (!clickCooldown && ((direction === 'next' && isHoveringRight && !isAtEnd()) ||
+                            (direction === 'prev' && isHoveringLeft && !isAtStart()))) {
+                            handleHover(direction);
+                        }
+                    }, 650);
                 }
             }, 300);
         }
 
-        // Scroll event - update line or close expanded based on card visibility
+        // Snap to nearest card after manual scrolling ends
+        let scrollEndTimeout = null;
+
+        function snapToNearestCard() {
+            // Don't snap if hovering on nav fields
+            if (isHoveringLeft || isHoveringRight) return;
+
+            // Update index based on current position and snap to it
+            currentCardIndex = getCurrentCardIndex();
+            currentCardIndex = Math.max(0, Math.min(cards.length - 1, currentCardIndex));
+            scrollToCard(currentCardIndex);
+        }
+
+        // Scroll event - update line, close expanded, and snap to card
         slidesContainer.addEventListener('scroll', () => {
-            if (!activeCard || !expandedWrapper.classList.contains('active')) {
-                lastScrollPosition = slidesContainer.scrollLeft;
-                return;
+            // Clear previous timeout
+            clearTimeout(scrollEndTimeout);
+
+            // Handle expanded card visibility
+            if (activeCard && expandedWrapper.classList.contains('active')) {
+                if (isCardVisible(activeCard)) {
+                    updateLinePosition();
+                } else {
+                    closeExpanded();
+                }
             }
 
-            // Check if active card is still visible
-            if (isCardVisible(activeCard)) {
-                // Card is still visible, just update the line position
-                updateLinePosition();
-            } else {
-                // Card scrolled out of view, close expanded
-                closeExpanded();
-            }
+            // Snap to nearest card after scrolling stops (debounced)
+            scrollEndTimeout = setTimeout(snapToNearestCard, 150);
 
             lastScrollPosition = slidesContainer.scrollLeft;
         });
@@ -533,24 +606,18 @@
             }
         }
 
-        // Initialize scroll position to first card (skip spacer)
+        // Initialize scroll position to first card
         function initScrollPosition() {
-            const bounds = getScrollBounds();
-            slidesContainer.scrollLeft = bounds.min;
+            currentCardIndex = 0;
+            scrollToCard(0);
         }
 
         // Set initial position after a brief delay to ensure layout is complete
         setTimeout(initScrollPosition, 100);
 
-        // Recalculate on resize
+        // Recalculate on resize - maintain current card
         window.addEventListener('resize', () => {
-            // Clamp scroll position to valid bounds
-            const bounds = getScrollBounds();
-            if (slidesContainer.scrollLeft < bounds.min) {
-                slidesContainer.scrollLeft = bounds.min;
-            } else if (slidesContainer.scrollLeft > bounds.max) {
-                slidesContainer.scrollLeft = bounds.max;
-            }
+            scrollToCard(currentCardIndex);
         });
 
         // Click handler for expansion

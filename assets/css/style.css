@@ -2000,6 +2000,12 @@ a {
         margin: 0 80px;
     }
 
+    .propulsion-carousel-slides::before,
+    .propulsion-carousel-slides::after {
+        flex: 0 0 calc(27.5% - 24px);
+        min-width: calc(27.5% - 24px);
+    }
+
     .propulsion-nav-field {
         width: 80px;
     }
@@ -2066,12 +2072,38 @@ a {
         margin: 0 24px;
     }
 
-    .propulsion-card-title {
-        font-size: 1.1rem;
+    .propulsion-carousel-slides::before,
+    .propulsion-carousel-slides::after {
+        flex: 0 0 calc(12.5% - 12px);
+        min-width: calc(12.5% - 12px);
     }
 
-    .propulsion-card:hover .propulsion-card-title {
-        transform: translateY(-40px);
+    .propulsion-card-inner {
+        padding: 16px;
+    }
+
+    .propulsion-card-title {
+        font-size: 1rem;
+    }
+
+    .propulsion-card:hover .propulsion-card-title,
+    .propulsion-card.active .propulsion-card-title {
+        transform: translateY(-36px);
+    }
+
+    .propulsion-card-reveal {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        gap: 4px;
+    }
+
+    .propulsion-card-type {
+        font-size: 0.75rem;
+    }
+
+    .propulsion-card-status {
+        font-size: 0.65rem;
     }
 
     .chassis-grid {
@@ -2129,7 +2161,51 @@ a {
     }
 
     .propulsion-card {
-        padding: 20px;
+        flex: 0 0 calc(85% - 12px);
+        min-width: calc(85% - 12px);
+    }
+
+    .propulsion-carousel-track {
+        margin: 0 40px;
+    }
+
+    .propulsion-nav-field {
+        width: 40px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .propulsion-carousel-slides::before,
+    .propulsion-carousel-slides::after {
+        flex: 0 0 calc(7.5% - 6px);
+        min-width: calc(7.5% - 6px);
+    }
+
+    .propulsion-card-inner {
+        padding: 12px;
+    }
+
+    .propulsion-card-title {
+        font-size: 0.9rem;
+    }
+
+    .propulsion-card:hover .propulsion-card-title,
+    .propulsion-card.active .propulsion-card-title {
+        transform: translateY(-32px);
+    }
+
+    .propulsion-card-reveal {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+    }
+
+    .propulsion-card-type {
+        font-size: 0.7rem;
+    }
+
+    .propulsion-card-status {
+        font-size: 0.6rem;
     }
 
     .chassis-item {
