@@ -1199,6 +1199,949 @@ a {
 }
 
 /* ============================================
+   VEHICLE PAGE
+   ============================================ */
+
+/* Vehicle Hero */
+.vehicle-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: calc(var(--header-height) + 80px) 48px 100px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 80%, rgba(20, 20, 30, 0.5) 0%, var(--color-bg) 60%);
+}
+
+.vehicle-hero-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+}
+
+.vehicle-hero-title {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 0.95;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.vehicle-hero-text {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 700px;
+    margin-bottom: 32px;
+}
+
+.vehicle-hero-subtext {
+    font-size: 0.875rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.4);
+    max-width: 500px;
+}
+
+/* Vehicle Sections */
+.vehicle-section {
+    padding: 100px 48px;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+}
+
+.vehicle-section-alt {
+    background: linear-gradient(180deg, #0a0a0f 0%, var(--color-bg) 100%);
+}
+
+.vehicle-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.vehicle-section-intro {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin-bottom: 56px;
+}
+
+/* Development Sequence */
+.dev-sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.dev-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dev-step:last-child {
+    border-bottom: none;
+}
+
+.dev-step-num {
+    grid-row: 1 / 3;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.15);
+    line-height: 1;
+}
+
+.dev-step-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+}
+
+.dev-step-desc {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Requirements Grid */
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+}
+
+.requirements-column {
+    padding: 0 48px;
+    position: relative;
+}
+
+.requirements-column:first-child {
+    padding-left: 0;
+}
+
+.requirements-column:last-child {
+    padding-right: 0;
+}
+
+/* Vertical dividers between columns */
+.requirements-column:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border);
+}
+
+.requirements-title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+}
+
+.requirements-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.requirements-list li {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    padding-left: 16px;
+    position: relative;
+}
+
+.requirements-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+/* Propulsion Gallery - Carousel */
+.propulsion-gallery {
+    position: relative;
+    overflow: visible;
+}
+
+.propulsion-nav-field {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.propulsion-nav-left {
+    left: 0;
+    justify-content: flex-start;
+    padding-left: 16px;
+    background: transparent;
+}
+
+.propulsion-nav-right {
+    right: 0;
+    justify-content: flex-end;
+    padding-right: 16px;
+    background: transparent;
+}
+
+.propulsion-nav-arrow {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.propulsion-nav-field:hover .propulsion-nav-arrow {
+    opacity: 1;
+    color: var(--color-text);
+}
+
+.propulsion-carousel-track {
+    overflow: visible;
+    margin: 0 100px;
+}
+
+.propulsion-carousel-slides {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    /* Enable touch scrolling with snap */
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    /* Vertical padding for hover scale */
+    padding: 40px 0;
+}
+
+/* Spacers to allow first/last cards to center with peek visible */
+.propulsion-carousel-slides::before,
+.propulsion-carousel-slides::after {
+    content: '';
+    flex: 0 0 calc(35% - 36px);
+    min-width: calc(35% - 36px);
+}
+
+.propulsion-carousel-slides::-webkit-scrollbar {
+    display: none;
+}
+
+/* Propulsion Card - Square Tile */
+.propulsion-card {
+    position: relative;
+    flex: 0 0 calc(30% - 16px);
+    min-width: calc(30% - 16px);
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+                opacity 0.4s ease;
+    overflow: visible;
+    scroll-snap-align: center;
+}
+
+.propulsion-card:hover {
+    transform: scale(1.03);
+}
+
+/* Corner Status Indicators */
+.propulsion-card::before,
+.propulsion-card::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Top-right corner - horizontal */
+.propulsion-card::before {
+    top: -1px;
+    right: -1px;
+    width: 25%;
+    height: 2px;
+    background: var(--status-color, rgba(255,255,255,0.3));
+}
+
+/* Top-right corner - vertical */
+.propulsion-card::after {
+    top: -1px;
+    right: -1px;
+    width: 2px;
+    height: 25%;
+    background: var(--status-color, rgba(255,255,255,0.3));
+}
+
+/* Bottom-left corner indicators (using inner element) */
+.propulsion-card-corners {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.propulsion-card-corners::before,
+.propulsion-card-corners::after {
+    content: '';
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Bottom-left corner - horizontal */
+.propulsion-card-corners::before {
+    bottom: -1px;
+    left: -1px;
+    width: 25%;
+    height: 2px;
+    background: var(--status-color, rgba(255,255,255,0.3));
+}
+
+/* Bottom-left corner - vertical */
+.propulsion-card-corners::after {
+    bottom: -1px;
+    left: -1px;
+    width: 2px;
+    height: 25%;
+    background: var(--status-color, rgba(255,255,255,0.3));
+}
+
+/* Hover 3D effect - corners expand outward */
+.propulsion-card:hover::before {
+    transform: translate(6px, -6px);
+}
+
+.propulsion-card:hover::after {
+    transform: translate(6px, -6px);
+}
+
+.propulsion-card:hover .propulsion-card-corners::before {
+    transform: translate(-6px, 6px);
+}
+
+.propulsion-card:hover .propulsion-card-corners::after {
+    transform: translate(-6px, 6px);
+}
+
+/* Active card state */
+.propulsion-card.active {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.propulsion-card.active::before,
+.propulsion-card.active::after {
+    transform: translate(6px, -6px);
+}
+
+.propulsion-card.active .propulsion-card-corners::before,
+.propulsion-card.active .propulsion-card-corners::after {
+    transform: translate(-6px, 6px);
+}
+
+/* Status Colors */
+.propulsion-card[data-status="failed"] {
+    --status-color: #ef4444;
+}
+
+.propulsion-card[data-status="testing"] {
+    --status-color: #e5e5e5;
+}
+
+.propulsion-card[data-status="passed"] {
+    --status-color: #22c55e;
+}
+
+.propulsion-card[data-status="prospective"] {
+    --status-color: #eab308;
+}
+
+/* Card Inner Content */
+.propulsion-card-inner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Title - always visible at bottom left */
+.propulsion-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 0;
+    transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.propulsion-card:hover .propulsion-card-title {
+    transform: translateY(-48px);
+}
+
+/* Hover-reveal content */
+.propulsion-card-reveal {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+                transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.propulsion-card:hover .propulsion-card-reveal,
+.propulsion-card.active .propulsion-card-reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.propulsion-card.active .propulsion-card-title {
+    transform: translateY(-48px);
+}
+
+/* Type definition - scramble text */
+.propulsion-card-type {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.02em;
+    overflow: hidden;
+}
+
+/* Status label - scramble text */
+.propulsion-card-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.propulsion-card[data-status="failed"] .propulsion-card-status {
+    color: #ef4444;
+}
+
+.propulsion-card[data-status="testing"] .propulsion-card-status {
+    color: #e5e5e5;
+}
+
+.propulsion-card[data-status="passed"] .propulsion-card-status {
+    color: #22c55e;
+}
+
+.propulsion-card[data-status="prospective"] .propulsion-card-status {
+    color: #eab308;
+}
+
+/* Scramble text effect */
+.scramble-text {
+    display: inline-block;
+}
+
+.scramble-text .char {
+    display: inline-block;
+    transition: opacity 0.1s ease;
+}
+
+/* Expanded Detail Section - Below Carousel */
+.propulsion-expanded-wrapper {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.215, 0.61, 0.355, 1),
+                opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    margin: 0 60px;
+}
+
+.propulsion-expanded-wrapper.active {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.propulsion-expanded-content {
+    padding: 40px 0;
+    position: relative;
+}
+
+/* Connecting line from card */
+.propulsion-expanded-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 40px;
+    background: var(--color-border);
+    transform: translateX(-50%);
+    transition: left 0.15s ease-out;
+}
+
+.propulsion-expanded-body {
+    max-width: 700px;
+    margin-left: var(--content-offset, 0);
+}
+
+.propulsion-expanded-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.propulsion-expanded-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.propulsion-expanded-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.propulsion-expanded-type {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.propulsion-expanded-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+}
+
+.propulsion-card[data-status="failed"] ~ .propulsion-expanded-wrapper .propulsion-expanded-status,
+.propulsion-expanded-wrapper[data-status="failed"] .propulsion-expanded-status {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.propulsion-expanded-wrapper[data-status="testing"] .propulsion-expanded-status {
+    background: rgba(229, 229, 229, 0.15);
+    color: #e5e5e5;
+}
+
+.propulsion-expanded-wrapper[data-status="passed"] .propulsion-expanded-status {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+.propulsion-expanded-wrapper[data-status="prospective"] .propulsion-expanded-status {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.propulsion-expanded-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.propulsion-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.propulsion-detail-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.propulsion-detail-value {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Testing Groups */
+.testing-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.testing-group {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.testing-group:first-child {
+    border-top: 1px solid var(--color-border);
+}
+
+.testing-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 24px 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: var(--color-text);
+}
+
+.testing-group-title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.testing-group-icon {
+    color: var(--color-text-muted);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.testing-group.open .testing-group-icon {
+    transform: rotate(180deg);
+}
+
+.testing-group-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.testing-group.open .testing-group-content {
+    max-height: 400px;
+    padding-bottom: 24px;
+}
+
+.testing-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.testing-item:last-child {
+    border-bottom: none;
+}
+
+.testing-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-text-muted);
+}
+
+.testing-value {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Chassis Grid */
+.chassis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
+}
+
+.chassis-title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.chassis-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.chassis-item {
+    padding-left: 20px;
+    border-left: 2px solid var(--color-border);
+}
+
+.chassis-item-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.chassis-item-desc {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Compliance Cards */
+.compliance-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.compliance-card {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.compliance-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-4px);
+}
+
+.compliance-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.compliance-card-desc {
+    font-family: Calibri, 'Gill Sans', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.compliance-card-link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+}
+
+.compliance-card:hover .compliance-card-link {
+    color: var(--color-text);
+}
+
+/* Vehicle Page Responsive */
+@media (max-width: 1024px) {
+    .requirements-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .requirements-column {
+        padding: 0;
+        padding-bottom: 48px;
+    }
+
+    .requirements-column:last-child {
+        padding-bottom: 0;
+    }
+
+    /* Change vertical dividers to horizontal on mobile */
+    .requirements-column:not(:last-child)::after {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 1px;
+    }
+
+    .propulsion-card {
+        flex: 0 0 calc(45% - 12px);
+        min-width: calc(45% - 12px);
+    }
+
+    .propulsion-carousel-track {
+        margin: 0 80px;
+    }
+
+    .propulsion-nav-field {
+        width: 80px;
+    }
+
+    .propulsion-expanded-wrapper {
+        margin: 0 40px;
+    }
+
+    .chassis-grid {
+        gap: 48px;
+    }
+
+    .compliance-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vehicle-hero {
+        padding: calc(var(--header-height) + 60px) 24px 80px;
+    }
+
+    .vehicle-hero-title {
+        margin-bottom: 32px;
+    }
+
+    .vehicle-section {
+        padding: 80px 24px;
+    }
+
+    .vehicle-section-intro {
+        margin-bottom: 40px;
+    }
+
+    .dev-step {
+        grid-template-columns: 60px 1fr;
+        gap: 0 16px;
+        padding: 24px 0;
+    }
+
+    .dev-step-num {
+        font-size: 1.5rem;
+    }
+
+    .dev-step-title {
+        font-size: 1rem;
+    }
+
+    .propulsion-card {
+        flex: 0 0 calc(75% - 12px);
+        min-width: calc(75% - 12px);
+    }
+
+    .propulsion-carousel-track {
+        margin: 0 60px;
+    }
+
+    .propulsion-nav-field {
+        width: 60px;
+    }
+
+    .propulsion-expanded-wrapper {
+        margin: 0 24px;
+    }
+
+    .propulsion-card-title {
+        font-size: 1.1rem;
+    }
+
+    .propulsion-card:hover .propulsion-card-title {
+        transform: translateY(-40px);
+    }
+
+    .chassis-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .testing-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .propulsion-expanded-body {
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .vehicle-hero {
+        padding: calc(var(--header-height) + 48px) 16px 64px;
+    }
+
+    .vehicle-hero-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+    }
+
+    .vehicle-hero-text {
+        font-size: 0.95rem;
+    }
+
+    .vehicle-hero-subtext {
+        font-size: 0.8rem;
+    }
+
+    .vehicle-section {
+        padding: 64px 16px;
+    }
+
+    .vehicle-section-intro {
+        font-size: 1rem;
+    }
+
+    .dev-step {
+        grid-template-columns: 48px 1fr;
+        gap: 0 12px;
+    }
+
+    .dev-step-num {
+        font-size: 1.25rem;
+    }
+
+    .requirements-column {
+        padding: 24px;
+    }
+
+    .propulsion-card {
+        padding: 20px;
+    }
+
+    .chassis-item {
+        padding-left: 16px;
+    }
+
+    .compliance-card {
+        padding: 24px;
+    }
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 .footer {
