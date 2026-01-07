@@ -300,4 +300,47 @@
         init();
     }
 
+    (function() {
+        const form = document.getElementById('contactForm');
+        const recaptcha = document.getElementById('recaptcha');
+        const submitBtn = document.getElementById('submitBtn');
+        const formSuccess = document.getElementById('formSuccess');
+        let isVerified = false;
+
+        // reCAPTCHA click handler
+        recaptcha.addEventListener('click', function() {
+            if (!isVerified) {
+                isVerified = true;
+                recaptcha.classList.add('verified');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Form submit handler
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!isVerified) {
+                alert('Please verify you are not a robot.');
+                return;
+            }
+
+            const targetEmail = document.getElementById('subject').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').selectedOptions[0].text;
+            const message = document.getElementById('message').value;
+
+            // Create mailto link with form data
+            const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject + ' - ' + name)}&body=${encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show success message
+            form.classList.add('hidden');
+            formSuccess.classList.add('show');
+        });
+    })()
+    
 })();

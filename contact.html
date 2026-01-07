@@ -55,7 +55,66 @@
     <main class="page-content">
         <section class="page-hero">
             <h1 class="page-title">Contact</h1>
-            <p class="page-description">Placeholder content for the Contact page.</p>
+            <p class="page-subtitle">Get in Touch</p>
+        </section>
+
+        <section class="content-section">
+            <div class="contact-form-wrapper">
+                <p class="contact-intro">
+                    We'd love to hear from you. Fill out the form below or reach out via email.
+                </p>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name *</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject *</label>
+                        <select id="subject" name="subject" class="form-select" required>
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="contact@ascerex.com">General Inquiry</option>
+                            <option value="newsroom@ascerex.com">Media & Press</option>
+                            <option value="support@ascerex.com">Technical Support</option>
+                            <option value="investors@ascerex.com">Investor Relations</option>
+                            <option value="partners@ascerex.com">Partnerships</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message *</label>
+                        <textarea id="message" name="message" class="form-textarea" placeholder="Reason for contact..." required></textarea>
+                    </div>
+
+                    <div class="recaptcha-container" id="recaptcha">
+                        <div class="recaptcha-checkbox">
+                            <svg class="recaptcha-checkmark" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span class="recaptcha-text">I'm not a robot</span>
+                        <span class="recaptcha-brand">reCAPTCHA</span>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit</button>
+                </form>
+
+                <div class="form-success" id="formSuccess">
+                    <div class="form-success-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="form-success-title">Thank you!</h3>
+                    <p class="form-success-text">Your message has been received. We'll get back to you soon!</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -66,7 +125,7 @@
                 <a href="mailto:contact@ascerex.com" class="footer-contact-email">contact@ascerex.com</a>
             </div>
             <div class="footer-privacy">
-                <a href="#">Privacy Policy</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
             </div>
             <p class="footer-copyright">&copy; 2025 ASCEREX</p>
         </div>
