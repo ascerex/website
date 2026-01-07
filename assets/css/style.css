@@ -1208,8 +1208,8 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: calc(var(--header-height) + 80px) 48px 100px;
+    min-height: 30vh;
+    padding: calc(var(--header-height) + 20px) 18px 120px;
     text-align: center;
     background: radial-gradient(ellipse at 50% 80%, rgba(20, 20, 30, 0.5) 0%, var(--color-bg) 60%);
 }
@@ -1328,7 +1328,7 @@ a {
 }
 
 .requirements-column:first-child {
-    padding-left: 0;
+    padding-left: 0 48px;
 }
 
 .requirements-column:last-child {
