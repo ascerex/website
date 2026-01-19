@@ -463,6 +463,22 @@
                    cardCenter < containerRect.right + buffer;
         }
 
+        // Check if card is fully visible (not an edge/peeking card)
+        function isCardFullyVisible(card) {
+            const containerRect = slidesContainer.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            // Card must be fully within container bounds (with small tolerance)
+            const tolerance = 10;
+            return cardRect.left >= containerRect.left - tolerance &&
+                   cardRect.right <= containerRect.right + tolerance;
+        }
+
+        // Get card index
+        function getCardIndex(card) {
+            return Array.from(cards).indexOf(card);
+        }
+
         // Update the connecting line position
         function updateLinePosition() {
             if (!activeCard || !expandedWrapper) return;
@@ -620,6 +636,65 @@
             scrollToCard(currentCardIndex);
         });
 
+        // Show expanded content for a card
+        function showExpandedContent(card) {
+            if (!expandedWrapper) return;
+
+            // Remove active from previous card
+            if (activeCard && activeCard !== card) {
+                activeCard.classList.remove('active');
+            }
+
+            // Set new active card
+            activeCard = card;
+            card.classList.add('active');
+
+            // Get card data
+            const data = {
+                title: card.dataset.title,
+                type: card.dataset.type,
+                status: card.dataset.status,
+                statusLabel: card.dataset.statusLabel,
+                rationale: card.dataset.rationale,
+                analysis: card.dataset.analysis,
+                takeaway: card.dataset.takeaway
+            };
+
+            // Calculate line position based on card position
+            const cardRect = card.getBoundingClientRect();
+            const wrapperRect = expandedWrapper.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2 - wrapperRect.left;
+            const linePercent = Math.max(5, Math.min(95, (cardCenterX / wrapperRect.width) * 100));
+
+            // Update expanded content
+            expandedWrapper.querySelector('.propulsion-expanded-title').textContent = data.title;
+            expandedWrapper.querySelector('.propulsion-expanded-type').textContent = data.type;
+            expandedWrapper.querySelector('.propulsion-expanded-status').textContent = data.statusLabel;
+            expandedWrapper.querySelector('#expanded-rationale').textContent = data.rationale;
+            expandedWrapper.querySelector('#expanded-analysis').textContent = data.analysis;
+            expandedWrapper.querySelector('#expanded-takeaway').textContent = data.takeaway;
+
+            // Set status color
+            expandedWrapper.dataset.status = data.status;
+
+            // Set line position
+            expandedWrapper.querySelector('.propulsion-expanded-line').style.left = `${linePercent}%`;
+
+            // Reset content offset for carousel layout
+            expandedWrapper.querySelector('.propulsion-expanded-body').style.marginLeft = '0';
+
+            // Fade in/update
+            if (!expandedWrapper.classList.contains('active')) {
+                expandedWrapper.classList.add('active');
+            } else {
+                // Quick fade for content switch
+                expandedWrapper.style.opacity = '0';
+                setTimeout(() => {
+                    expandedWrapper.style.opacity = '1';
+                }, 50);
+            }
+        }
+
         // Click handler for expansion
         cards.forEach((card) => {
             card.addEventListener('click', () => {
@@ -631,59 +706,31 @@
                     return;
                 }
 
-                // Remove active from previous card
-                if (activeCard) {
-                    activeCard.classList.remove('active');
-                }
+                // If card is an edge/peeking card (not fully visible), scroll by 1 in appropriate direction
+                if (!isCardFullyVisible(card)) {
+                    const cardRect = card.getBoundingClientRect();
+                    const containerRect = slidesContainer.getBoundingClientRect();
+                    const containerCenter = containerRect.left + containerRect.width / 2;
+                    const cardCenter = cardRect.left + cardRect.width / 2;
 
-                // Set new active card
-                activeCard = card;
-                card.classList.add('active');
+                    // Determine direction based on where the card is relative to center
+                    if (cardCenter > containerCenter) {
+                        // Card is on the right edge, scroll right (next)
+                        scrollNext();
+                    } else {
+                        // Card is on the left edge, scroll left (prev)
+                        scrollPrev();
+                    }
 
-                // Get card data
-                const data = {
-                    title: card.dataset.title,
-                    type: card.dataset.type,
-                    status: card.dataset.status,
-                    statusLabel: card.dataset.statusLabel,
-                    rationale: card.dataset.rationale,
-                    analysis: card.dataset.analysis,
-                    takeaway: card.dataset.takeaway
-                };
-
-                // Calculate line position based on card position
-                const cardRect = card.getBoundingClientRect();
-                const wrapperRect = expandedWrapper.getBoundingClientRect();
-                const cardCenterX = cardRect.left + cardRect.width / 2 - wrapperRect.left;
-                const linePercent = Math.max(5, Math.min(95, (cardCenterX / wrapperRect.width) * 100));
-
-                // Update expanded content
-                expandedWrapper.querySelector('.propulsion-expanded-title').textContent = data.title;
-                expandedWrapper.querySelector('.propulsion-expanded-type').textContent = data.type;
-                expandedWrapper.querySelector('.propulsion-expanded-status').textContent = data.statusLabel;
-                expandedWrapper.querySelector('#expanded-rationale').textContent = data.rationale;
-                expandedWrapper.querySelector('#expanded-analysis').textContent = data.analysis;
-                expandedWrapper.querySelector('#expanded-takeaway').textContent = data.takeaway;
-
-                // Set status color
-                expandedWrapper.dataset.status = data.status;
-
-                // Set line position
-                expandedWrapper.querySelector('.propulsion-expanded-line').style.left = `${linePercent}%`;
-
-                // Reset content offset for carousel layout
-                expandedWrapper.querySelector('.propulsion-expanded-body').style.marginLeft = '0';
-
-                // Fade in/update
-                if (!expandedWrapper.classList.contains('active')) {
-                    expandedWrapper.classList.add('active');
-                } else {
-                    // Quick fade for content switch
-                    expandedWrapper.style.opacity = '0';
+                    // Show details after scroll animation completes
                     setTimeout(() => {
-                        expandedWrapper.style.opacity = '1';
-                    }, 50);
+                        showExpandedContent(card);
+                    }, 450);
+                    return;
                 }
+
+                // Card is fully visible, show details immediately
+                showExpandedContent(card);
             });
         });
     }
