@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyway | Ascerex</title>
-    <!-- Browser favicon -->
     <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon-white.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96W.png">
-    <!-- iOS Home Screen -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-title" content="Ascerex">
-    <!-- Android / PWA -->
     <link rel="manifest" href="/assets/favicon/site.webmanifest">
     <meta name="theme-color" content="#0a0a0a">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -23,7 +20,6 @@
                     <img src="assets/favicon/logo.svg" alt="Ascerex Logo" class="logo-icon">
                     <span class="logo-text">ASCEREX</span>
                 </a>
-
                 <nav class="nav-desktop">
                     <a href="mission.html" class="nav-link">Mission</a>
                     <a href="vehicle.html" class="nav-link">Vehicle</a>
@@ -32,14 +28,12 @@
                     <a href="investors.html" class="nav-link">Investors</a>
                     <a href="contact.html" class="nav-link">Contact</a>
                 </nav>
-
                 <button class="hamburger" aria-label="Toggle menu">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                 </button>
             </div>
-
             <nav class="nav-mobile">
                 <a href="mission.html" class="nav-link">Mission</a>
                 <a href="vehicle.html" class="nav-link">Vehicle</a>
@@ -51,10 +45,66 @@
         </header>
     </div>
 
-    <main class="page-content">
-        <section class="page-hero">
-            <h1 class="page-title">Skyway</h1>
-            <p class="page-description">Placeholder content for the Skyway page.</p>
+    <main>
+        <!-- Hero -->
+        <section class="vehicle-hero">
+            <span class="vehicle-hero-label">Aerial Infrastructure</span>
+            <h1 class="vehicle-hero-title">The Skyway</h1>
+            <p class="vehicle-hero-text">A structured aerial routing network enabling safe, scalable, and autonomous high-speed flight outside traditional airport infrastructure.</p>
+        </section>
+
+        <!-- Why It's Needed -->
+        <section class="vehicle-section">
+            <div class="vehicle-section-inner">
+                <p class="vehicle-section-intro">Free-flight autonomy does not scale. Without structure, noise, safety, and congestion compound rapidly, certification becomes impossible, and operations remain tied to centralized pads and short hops. The Skyway defines explicit routes, entry and exit points, altitude layers, and operational rules that allow vehicles with different capabilities to coexist and operate predictably.</p>
+            </div>
+        </section>
+
+        <!-- Development Sequence -->
+        <section class="vehicle-section vehicle-section-alt">
+            <div class="vehicle-section-inner">
+                <h2 class="requirements-title">Development Sequence</h2>
+                <div class="dev-sequence">
+                    <div class="dev-step">
+                        <span class="dev-step-num">01</span>
+                        <div class="dev-step-content">
+                            <h3 class="dev-step-title">Airspace Definition & Operational Framework</h3>
+                            <p class="dev-step-desc">Define current routes and new route operations including entries, exits, merges, altitude overlays, operational terms, and vehicular capability requirements within this airspace. Establish network necessities and foundational requirements for the Skyway infrastructure.</p>
+                        </div>
+                    </div>
+                    <div class="dev-step">
+                        <span class="dev-step-num">02</span>
+                        <div class="dev-step-content">
+                            <h3 class="dev-step-title">Network Generation Algorithm</h3>
+                            <p class="dev-step-desc">Research and develop the algorithm to programmatically generate the Skyway network. This includes defining entries, exits, merges, splits, and route structures across multiple altitude layers while accounting for geographic and regulatory constraints.</p>
+                        </div>
+                    </div>
+                    <div class="dev-step">
+                        <span class="dev-step-num">03</span>
+                        <div class="dev-step-content">
+                            <h3 class="dev-step-title">Constraint-Aware Pathfinding</h3>
+                            <p class="dev-step-desc">Develop a constraint-aware routing system for optimal path calculation between any two points using the Skyway for traversal. The algorithm considers vehicle performance envelope, energy state, noise restrictions, traffic density, and real-time conditions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicle Integration Note -->
+        <section class="vehicle-section">
+            <div class="vehicle-section-inner">
+                <h2 class="requirements-title">Vehicle Integration</h2>
+                <p class="vehicle-section-intro">Skyway accessibility is determined by vehicle capability, not operator preference. Mapped routes and their accessibility are directly tied to verified vehicle performance envelopes. Two vehicles may take different paths between the same points based on their individual capabilities and constraints.</p>
+            </div>
+        </section>
+
+        <!-- Policy -->
+        <section class="vehicle-section vehicle-section-alt">
+            <div class="vehicle-section-inner">
+                <h2 class="requirements-title">Policy & Regulatory Path</h2>
+                <p class="vehicle-section-intro">Skyway deployment requires regulatory evolution, not regulatory avoidance. Policy considerations are integrated from day one to ensure compatibility with certification standards, safety requirements, and public acceptance frameworks.</p>
+                <a href="mission.html" class="compliance-card-link" style="display: inline-block; margin-top: 24px; padding: 12px 24px; border: 1px solid var(--color-border); transition: all 0.3s ease;">View Policy Framework →</a>
+            </div>
         </section>
     </main>
 
@@ -65,7 +115,7 @@
                 <a href="mailto:contact@ascerex.com" class="footer-contact-email">contact@ascerex.com</a>
             </div>
             <div class="footer-privacy">
-                <a href="#">Privacy Policy</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
             </div>
             <p class="footer-copyright">&copy; 2025 ASCEREX</p>
         </div>
